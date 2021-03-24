@@ -1,13 +1,55 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-const PostListItem = () => {
-    return (
-        <li className="app-list-item d-flex justify-content-between">
-            <span className="app-list-item-label">
-                Hello World!
+import './post-list-item.css';
+
+export default class PostListItem extends Component {
+    constructor (props) {
+        super(props);
+        this.state = {
+            important: false,
+            like: false
+        };
+        this.onImprtant = this.onImprtant.bind(this);
+        this.onLike = this.onLike.bind(this);
+    }
+
+    onImprtant() {
+        this.setState(({important}) => ({
+           important: !important 
+        }))
+    }
+
+    onLike() {
+        this.setState(({like}) => ({
+           like: !like 
+        }))
+    }
+
+    render () {
+        const {label} = this.props;
+        const {important, like} = this.state;
+        let classNames = "app-list-item d-flex justify-content-between";
+
+        if (important) {
+            classNames += " important";
+        }
+
+        if (like) {
+            classNames += " like";
+        }
+
+        return (
+            <div className={classNames}>
+            <span 
+            className="app-list-item-label"
+            onClick={this.onLike}>
+                {label}
             </span>
             <div className="d-flex justify-content-center align-items-center">
-                <button type="button" className="btn-star btn-sm">
+                <button 
+                type="button"
+                className="btn-star btn-sm"
+                onClick={this.onImprtant}>
                     <i className="fa fa-star"></i>
                 </button>
                 <button type="button" className="btn-trash btn-sm">
@@ -15,8 +57,8 @@ const PostListItem = () => {
                 </button>
                 <i className="fa fa-heart"></i>
             </div>
-        </li>
-    )
+            </div>
+        )
+    }
 }
 
-export default PostListItem;
