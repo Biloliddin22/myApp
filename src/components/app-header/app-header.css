@@ -5,9 +5,11 @@
 }
 
 .app-header h1 {
-  /* width: 150px;
-  height: 150px; */
   font-size: 26px;
+}
+
+.app-header h1:hover {
+  color: rgb(255, 0, 0);
 }
 
 .app-header h2 {
